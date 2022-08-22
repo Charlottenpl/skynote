@@ -7,12 +7,14 @@
       </el-header>
 <!--      主要内容-->
       <el-main id="main">
-        <Milk id="milk"/>
-        <Amusic/>
+<!--        <Milk/>-->
+        <Amusic id="milk"/>
       </el-main>
 <!--      底部布局-->
       <el-footer id="footer">
-        冀-2134234325425435432-1
+        <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank">
+          备案号：【 冀ICP备2021027170号-2】
+        </a>
       </el-footer>
     </el-container>
   </div>
@@ -50,5 +52,6 @@ export default {
 
 #footer{
   background: #2c3e50;
+  color: #f2f2f2;
 }
 </style>

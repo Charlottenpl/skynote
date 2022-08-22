@@ -1,10 +1,12 @@
 <template>
-amusic
+<Milk/>
 </template>
 
 <script>
+import Milk from '../components/Milk.vue'
 export default {
-  name: "Amusic"
+  name: "Amusic",
+  components: {Milk}
 }
 </script>
 
