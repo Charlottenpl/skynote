@@ -3,11 +3,17 @@
     <el-container class="common-layout">
       <!--      头部布局-->
       <el-header id="header">
-        <el-card body-style="margin: 0;width: 100%;height: 100%;align-content: baseline" shadow="always">
+        <div style="margin: 25px 30px">
           <el-image style="height: 30px;vertical-align: middle" src="https://小熊.fun/api/file/favicon.ico;"/>
           <span class="title">Amusic</span>
-        </el-card>
+
+          <div style="float: right">
+            <span>1</span>
+            <span>2</span>
+          </div>
+        </div>
       </el-header>
+      <div style="height: 1px;background: #e7e7e7"/>
       <!--      主要内容-->
       <el-main id="main">
         <!--        <Milk/>-->
@@ -61,11 +67,12 @@ export default {
 }
 
 #main {
-  background: aliceblue;
-  padding-bottom: 50px;
+  padding: 0px;
+  background: #ffffff;
 }
 
 #milk {
+  min-height: 130%;
   width: 100%;
   height: 100%;
 }
