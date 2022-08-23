@@ -8,11 +8,12 @@
   <link href="../theme/prism-ghcolors.css" rel="stylesheet"/>
   <link href="../theme/prism-ghcolors.css" rel="stylesheet"/>
   <VueEditor :editor="editor"/>
+<!--  {{playWithEditor}} {{output}}  {{doc}}-->
 </template>
 
 <script>
 import {defineComponent} from "vue";
-import {Editor, rootCtx, defaultValueCtx} from "@milkdown/core";
+import {Editor, rootCtx, defaultValueCtx,editorViewOptionsCtx, editorViewCtx, serializerCtx} from "@milkdown/core";
 import {nord} from "@milkdown/theme-nord";
 import {VueEditor, useEditor} from "@milkdown/vue";
 import {commonmark} from "@milkdown/preset-commonmark";
@@ -47,6 +48,8 @@ import {cursor} from '@milkdown/plugin-cursor';
 import {diagram} from '@milkdown/plugin-diagram';
 //支持markdown格式的复制粘贴
 import {clipboard} from '@milkdown/plugin-clipboard';
+//导入store
+import { useCounterStore } from "../stores/counter.js";
 
 
 export default defineComponent({
@@ -54,30 +57,45 @@ export default defineComponent({
   components: {
     VueEditor,
   },
+
+  data() {
+    return {
+      output: '',
+      doc: ''
+    }
+  },
+  mounted () {
+    async function playWithEditor() {
+      const getMarkdown = () =>
+          editor.action((ctx) => {
+            const editorView = ctx.get(editorViewCtx);
+            const serializer = ctx.get(serializerCtx);
+            return serializer(editorView.state.doc);
+          });
+
+      // get markdown string:
+      getMarkdown();
+    }
+  },
   setup: () => {
 
-    const def = '## Amusic\n' +
-        '\n' +
-        '> Amusic 是一个非常非常好用的音乐播放器，以下是我拿来凑字数的。\n' +
-        '\n' +
-        '**更新日志：**\n' +
-        '\n' +
-        '220820\n' +
-        '\n' +
-        '[ ] 添加了音乐播放列表等功能。\n' +
-        '\n' +
-        '修复了一些bug\n' +
-        '\n' +
-        '优化了UI体验\n' +
-        '\n' +
-        '添加了更多功能～'
+    let output = '';
+    let doc = '';
+    const store = useCounterStore();
+    const enable = store.editable;
     const editor = useEditor((root) =>
         Editor.make()
             .config((ctx) => {
               ctx.set(rootCtx, root);
-              ctx.set(defaultValueCtx, def);
-
+              ctx.set(defaultValueCtx, store.def);
+              ctx.set(editorViewOptionsCtx, { enable });
+              ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
+                store.doc = markdown;
+                store.output = prevMarkdown
+                console.log(store.output);
+              });
             })
+            .use(listener)
             .use(nord)
             .use(emoji)
             .use(gfm)
@@ -85,7 +103,7 @@ export default defineComponent({
             .use(prism)
             .use(
                 tooltip.configure(tooltipPlugin, {
-                  bottom: true,
+                  bottom: editor,
                 }),
             )
             .use(slash)
@@ -99,13 +117,11 @@ export default defineComponent({
             .use(clipboard)
     );
     return {
-      editor,
+      editor,store,
     };
   },
 });
 </script>
 <style>
-.milknote{
-  background: #f2f2f2;
-}
+
 </style>
