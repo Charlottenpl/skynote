@@ -1,20 +1,23 @@
 <template>
   <div class="common-layout">
-    <el-container class="common-layout">
-      <!--      头部布局-->
-      <el-header id="header">
+    <!--      头部布局-->
+    <el-header id="header">
 
-        <div style="margin: 25px 30px">
-          <el-image style="height: 30px;vertical-align: middle" src="https://小熊.fun/api/file/favicon.ico;"/>
-          <span class="title">Amusic</span>
+      <div style="padding: 15px 30px">
+        <el-image style="height: 30px;vertical-align: middle" src="https://小熊.fun/api/file/favicon.ico;"/>
+        <span class="title">Amusic</span>
 
-          <div style="float: right">
-            <span>1</span>
-            <span>2</span>
-          </div>
+        <div style="float: right;height: 30px;align-content: center;padding-top: 7px;">
+          <span style="margin-right: 10px"><el-icon><Comment /></el-icon></span>
+          <span style="margin-right: 10px"><el-icon><UserFilled /></el-icon></span>
+          <span style="margin-right: 10px"><el-icon><Menu /></el-icon></span>
         </div>
-      </el-header>
-      <div style="height: 1px;background: #e7e7e7"/>
+      </div>
+    </el-header>
+    <div style="height: 1px;background: #e7e7e7"/>
+    <el-container class="common-layout1">
+
+
       <!--      主要内容-->
       <el-main id="main">
         <!--        <Milk/>-->
@@ -49,9 +52,14 @@ export default {
   height: 100%;
 }
 
+.common-layout1 {
+  width: 100%;
+  height: calc(100vh - 61px);
+}
+
 #header {
   align-content: center;
-  height: 80px;
+  height: 60px;
   padding: 0;
   color: #0e2c49;
   background: #ffffff;
@@ -69,6 +77,7 @@ export default {
 }
 
 #main {
+  height: 100%;
   padding: 0px;
   background: #ffffff;
 }
@@ -80,7 +89,7 @@ export default {
 }
 
 #footer {
-  height: 100px;
+  height: 60px;
   background: #44505b;
   color: #f2f2f2;
   align-content: center;

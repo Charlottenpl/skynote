@@ -1,6 +1,6 @@
 <template>
 
-  <router-view class="mains"></router-view>
+  <router-view style="padding: 0px"></router-view>
 
 </template>
 
