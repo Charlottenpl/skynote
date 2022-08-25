@@ -82,7 +82,7 @@ export default defineComponent({
     let output = '';
     let doc = '';
     const store = useCounterStore();
-    const enable = store.editable;
+    const enable = false;
     const editor = useEditor((root) =>
         Editor.make()
             .config((ctx) => {

@@ -22,14 +22,15 @@
       <el-main id="main">
         <!--        <Milk/>-->
         <Amusic id="milk"/>
-      </el-main>
-      <!--      底部布局-->
-      <el-footer id="footer">
-        <img src="https://小熊.fun/api/file/60076975-3e70-4330-94c0-0db4a3492849_img.png" style="vertical-align: middle"/>
-        <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" style="display: inline-block;vertical-align: middle;color: #f2f2f2">
+        <!--      底部布局-->
+        <el-footer id="footer">
+          <img src="https://小熊.fun/api/file/60076975-3e70-4330-94c0-0db4a3492849_img.png" style="vertical-align: middle"/>
+          <a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" style="display: inline-block;vertical-align: middle;color: #f2f2f2">
             备案号：【 冀ICP备2021027170号-2】
-        </a>
-      </el-footer>
+          </a>
+        </el-footer>
+      </el-main>
+
     </el-container>
   </div>
 </template>
@@ -89,7 +90,7 @@ export default {
 }
 
 #footer {
-  height: 60px;
+  height: 120px;
   background: #44505b;
   color: #f2f2f2;
   align-content: center;
