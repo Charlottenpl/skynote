@@ -27,6 +27,7 @@
     "@milkdown/preset-commonmark": "^6.3.2",
     "@milkdown/preset-gfm": "^6.3.2",
     "@milkdown/theme-nord": "^6.3.2",
+    "@milkdown/theme-tokyo": "^6.3.2",
     "@milkdown/vue": "^6.3.2",
     "element-plus": "^2.2.14",
     "pinia": "^2.0.17",

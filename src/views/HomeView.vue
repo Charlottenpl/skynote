@@ -4,7 +4,7 @@
     <el-header id="header">
 
       <div style="padding: 15px 30px">
-        <el-image style="height: 30px;vertical-align: middle" src="https://小熊.fun/api/file/favicon.ico;"/>
+        <el-image style="height: 30px;vertical-align: middle" :src="logo"/>
         <span class="title">Amusic</span>
 
         <div style="float: right;height: 30px;align-content: center;padding-top: 7px;">
@@ -38,11 +38,18 @@
 <script>
 import Milk from '../components/Milk.vue'
 import Amusic from "../components/Amusic.vue";
+import logo from "../assets/logo.svg"
 
 export default {
   components: {
     Milk, Amusic
-  }
+  },
+  data() {
+    return {
+      logo: logo,
+      doc: ''
+    }
+  },
 }
 </script>
 

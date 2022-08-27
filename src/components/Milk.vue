@@ -1,20 +1,30 @@
+<link rel="stylesheet" href="../theme/prism-ghcolors.css">
 <template>
   <!--  todo-list的图标需要用到-->
   <link
       href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
       rel="stylesheet">
 
-  <!--  代码高亮-->
-  <link href="../theme/prism-ghcolors.css" rel="stylesheet"/>
-  <link href="../theme/prism-ghcolors.css" rel="stylesheet"/>
   <VueEditor :editor="editor"/>
-<!--  {{playWithEditor}} {{output}}  {{doc}}-->
+  <!--  {{playWithEditor}} {{output}}  {{doc}}-->
 </template>
+
+<!--  代码高亮-->
+<style>
+@import "../theme/prism-ghcolors.css";
+</style>
 
 <script>
 import {defineComponent} from "vue";
-import {Editor, rootCtx, defaultValueCtx,editorViewOptionsCtx, editorViewCtx, serializerCtx} from "@milkdown/core";
-import {nord} from "@milkdown/theme-nord";
+import {
+  Editor,
+  rootCtx,
+  defaultValueCtx,
+  editorViewOptionsCtx,
+  editorViewCtx,
+  serializerCtx,
+  hex2rgb
+} from "@milkdown/core";
 import {VueEditor, useEditor} from "@milkdown/vue";
 import {commonmark} from "@milkdown/preset-commonmark";
 //表情支持
@@ -49,8 +59,13 @@ import {diagram} from '@milkdown/plugin-diagram';
 //支持markdown格式的复制粘贴
 import {clipboard} from '@milkdown/plugin-clipboard';
 //导入store
-import { useCounterStore } from "../stores/counter.js";
+import {useCounterStore} from "../stores/counter.js";
 
+//theme
+import {tokyo} from '@milkdown/theme-tokyo';
+import {nord} from "@milkdown/theme-nord";
+import {themeFactory, ThemeColor, ThemeSize, ThemeIcon, ThemeFont, ThemeGlobal, getPalette} from '@milkdown/core';
+import {lightColor} from "../theme/light";
 
 export default defineComponent({
   name: "Milk",
@@ -64,7 +79,7 @@ export default defineComponent({
       doc: ''
     }
   },
-  mounted () {
+  mounted() {
     async function playWithEditor() {
       const getMarkdown = () =>
           editor.action((ctx) => {
@@ -83,12 +98,25 @@ export default defineComponent({
     let doc = '';
     const store = useCounterStore();
     const enable = false;
+
+    const extendedNord = nord.override((emotion, manager) => {
+      const colorSet = lightColor;
+      manager.set(ThemeColor, (options) => {
+        if (!options) return;
+        const [key, opacity] = options;
+        const hex = colorSet[key];
+        const rgb = hex2rgb(hex);
+        if (!rgb) return;
+
+        return `rgba(${rgb?.join(', ')}, ${opacity || 1})`;
+      });
+    });
     const editor = useEditor((root) =>
         Editor.make()
             .config((ctx) => {
               ctx.set(rootCtx, root);
               ctx.set(defaultValueCtx, store.def);
-              ctx.set(editorViewOptionsCtx, { enable });
+              ctx.set(editorViewOptionsCtx, {enable});
               ctx.get(listenerCtx).markdownUpdated((ctx, markdown, prevMarkdown) => {
                 store.doc = markdown;
                 store.output = prevMarkdown
@@ -96,7 +124,10 @@ export default defineComponent({
               });
             })
             .use(listener)
+            // .use(tokyo)
             .use(nord)
+            .use(extendedNord)
+            // .use(myTheme)
             .use(emoji)
             .use(gfm)
             .use(history)
@@ -117,11 +148,16 @@ export default defineComponent({
             .use(clipboard)
     );
     return {
-      editor,store,
+      editor, store,
     };
   },
 });
 </script>
 <style>
-
+/* CDN 服务仅供平台体验和调试使用，平台不承诺服务的稳定性，企业客户需下载字体包自行发布使用并做好备份。 */
+@font-face {
+  font-family: "仓耳渔阳体 W02";font-weight: 400;src: url("//at.alicdn.com/wf/webfont/XluNjncSyg65/MgAktzwkQ1OlUYtULJ88J.woff2") format("woff2"),
+url("//at.alicdn.com/wf/webfont/XluNjncSyg65/RNMfHIcDcmjOX3aT09cuM.woff") format("woff");
+  font-display: swap;
+}
 </style>
