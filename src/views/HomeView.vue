@@ -1,11 +1,18 @@
 <template>
 
-  <router-link to="/amusic"><el-button>Amusic</el-button></router-link>
+
+  <router-link to="/amusic">
+    <Mark/>
+    <el-button>Amusic</el-button>
+  </router-link>
 </template>
 
 <script>
+import Mark from "../components/Mark.vue";
+
 export default {
-  name: "HomeView"
+  name: "HomeView",
+  components: {Mark}
 }
 </script>
 

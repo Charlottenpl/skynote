@@ -10,12 +10,15 @@
           </h2>
           <br/><br/>
 
-          <el-button type="primary" plain>
-            <el-icon style="margin-right: 3px">
-              <Promotion/>
-            </el-icon>
-            Get Start!
-          </el-button>
+          <a href="https://gitee.com/charlottepl/Amusic">
+            <el-button type="primary" plain>
+              <el-icon style="margin-right: 3px">
+                <Promotion/>
+              </el-icon>
+              Get Start!
+            </el-button>
+          </a>
+
           <el-button style="margin-left: 10px" type="success" plain>
             <el-icon style="margin-right: 3px">
               <Download/>

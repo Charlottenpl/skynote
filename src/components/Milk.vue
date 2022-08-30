@@ -63,7 +63,10 @@ import {useCounterStore} from "../stores/counter.js";
 
 //theme
 import {tokyo} from '@milkdown/theme-tokyo';
-import {nord} from "@milkdown/theme-nord";
+// 亮色主题
+import { nordLight } from "@milkdown/theme-nord";
+// 暗色主题
+import { nordDark } from "@milkdown/theme-nord";
 import {themeFactory, ThemeColor, ThemeSize, ThemeIcon, ThemeFont, ThemeGlobal, getPalette} from '@milkdown/core';
 import {lightColor} from "../theme/light";
 
@@ -125,7 +128,7 @@ export default defineComponent({
             })
             .use(listener)
             // .use(tokyo)
-            .use(nord)
+            .use(nordLight)
             .use(extendedNord)
             // .use(myTheme)
             .use(emoji)
